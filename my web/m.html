@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NARAZ - E-Commerce Store</title>
+    <link rel="stylesheet" href="./s.css">
+</head>
+<body>
+
+<header>
+    <div class="header-top">
+        <div class="logo">NARAZ</div>
+        <button id="cartButton" onclick="toggleCart()">🛒</button>
+    </div>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search products..." oninput="searchProducts()">
+        <button id="searchButton">Search</button>
+    </div>
+</header>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .slider-container {
+        width: 100%;
+        max-width: 1450px; /* Slider width */ 
+        height: 400px; /* Slider height */
+        overflow: hidden;
+        position: relative;
+        margin: auto;
+    }
+
+    .slider {
+        display: flex;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .slide {
+        min-width: 100%;
+        height: 100%;
+    }
+
+    .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Arrows */
+    .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        z-index: 10;
+    }
+
+    .arrow.left { left: 20px; }
+    .arrow.right { right: 20px; }
+
+    /* Circle indicators */
+    .indicators {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+    }
+
+    .indicator {
+        width: 12px;
+        height: 12px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .indicator.active {
+        background: rgba(255, 255, 255, 1);
+    }
+</style>
+
+<div class="slider-container">
+    <div class="slider">
+        <div class="slide"><img src="C:/Users/sumeet/Downloads/ex.jpg" alt="Slide 1"></div>
+        <div class="slide"><img src="C:/Users/sumeet/Downloads/ex.jpg" alt="Slide 2"></div>
+        <div class="slide"><img src="C:/Users/sumeet/Downloads/ex.jpg" alt="Slide 3"></div>
+        <div class="slide"><img src="C:/Users/sumeet/Downloads/ex.jpg" alt="Slide 4"></div>
+        <div class="slide"><img src="C:/Users/sumeet/Downloads/ex.jpg" alt="Slide 5"></div>
+        <div class="slide"><img src="C:/Users/sumeet/Downloads/ex.jpg" alt="Slide 6"></div>
+      <div class="slide"><img src="C:/Users/sumeet/Downloads/ex.jpg" alt="Slide 7"></div>
+      <div class="slide"><img src="C:/Users/sumeet/Downloads/ex.jpg" alt="Slide 8"></div>
+      <div class="slide"><img src="C:/Users/sumeet/Downloads/ex.jpg" alt="Slide 9"></div>
+      <div class="slide"><img src="C:/Users/sumeet/Downloads/ex.jpg" alt="Slide 10"></div>
+    </div>
+    <button class="arrow left" onclick="prevSlide()">&#8249;</button>
+    <button class="arrow right" onclick="nextSlide()">&#8250;</button>
+    <div class="indicators"></div>
+</div>
+
+<script>
+    const slider = document.querySelector('.slider');
+    const slides = document.querySelectorAll('.slide');
+    const indicators = document.querySelector('.indicators');
+    let currentIndex = 0;
+
+    // Create indicators dynamically
+    slides.forEach((_, index) => {
+        const indicator = document.createElement('div');
+        indicator.classList.add('indicator');
+        if (index === 0) indicator.classList.add('active');
+        indicator.addEventListener('click', () => goToSlide(index));
+        indicators.appendChild(indicator);
+    });
+
+    function updateSlider(index) {
+        currentIndex = index;
+        slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        // Update active indicator
+        document.querySelectorAll('.indicator').forEach((indicator, idx) => {
+            indicator.classList.toggle('active', idx === currentIndex);
+        });
+    }
+
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        updateSlider(currentIndex);
+    }
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateSlider(currentIndex);
+    }
+
+    function goToSlide(index) {
+        updateSlider(index);
+    }
+
+    // Auto slide every 3 seconds
+    setInterval(() => {
+        nextSlide();
+    }, 3000);
+</script>
+
+<div style="background-color: #333; text-align: center; padding: 20px;">
+    <h1 style="color: white; margin: 0;">CATEGORY</h1>
+</div>
+
+
+<!-- Full-Screen Cards Section (Main Highlights) -->
+<div class="full-screen-cards">
+    <a href="./tech.html" class="full-screen-card">
+        <img src="C:/Users/sumeet/Downloads/tt.jpeg" alt="Tech">
+        <h3>Tech</h3>
+    </a>
+    <a href="./clothing.html" class="full-screen-card">
+        <img src="C:/Users/sumeet/Downloads/cc.jpeg" alt="Clothing">
+        <h3>Clothing</h3>
+    </a>
+    <a href="./beauty.html" class="full-screen-card">
+        <img src="C:/Users/sumeet/Downloads/bb.jpeg" alt="Beauty">
+        <h3>Beauty</h3>
+    </a>
+    <a href="./home-kitchen.html" class="full-screen-card">
+        <img src="C:/Users/sumeet/Downloads/hk.jpeg" alt="Home & Kitchen">
+        <h3>Home & Kitchen</h3>
+    </a>
+    <a href="./books.html" class="full-screen-card">
+        <img src="C:/Users/sumeet/Downloads/bk.jpeg" alt="Books">
+        <h3>Books</h3>
+    </a>
+</div>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .product-cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 20px;
+    }
+
+    .product-card {
+        width: 200px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin: 10px;
+        text-align: center;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .product-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .product-card h3 {
+        font-size: 16px;
+        margin: 10px 0;
+    }
+
+    .product-card p {
+        color: #555;
+        font-size: 14px;
+    }
+
+    .product-card button {
+        margin-top: 10px;
+        padding: 10px;
+        background: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .product-card .quantity {
+        font-size: 16px;
+    }
+
+    .quantity-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .quantity-controls button {
+        width: 30px;
+        height: 30px;
+        font-size: 20px;
+        background: #eee;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
+</head>
+<body>
+
+
+<div style="background-color: #333; text-align: center; padding: 20px;">
+<h1 style="color: white; margin: 0;">JUST FOR YOU</h1>
+</div>
+
+<!-- Just For You Product Cards Section -->
+<div class="product-cards-container">
+<!-- Repeat the same card 50 times, updating the text if needed -->
+<div class="product-card">
+    <img src="C:/Users/sumeet/Downloads/bb.jpg" alt="Product Image">
+    <h3>Wireless Earbuds</h3>
+    <p>₹5000</p>
+    <div class="quantity-controls">
+        <button onclick="decreaseQuantity(this)">-</button>
+        <span class="quantity">1</span>
+        <button onclick="increaseQuantity(this)">+</button>
+    </div>
+    <button onclick="addToCart()">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="C:/Users/sumeet/Downloads/bb.jpg" alt="Product Image">
+    <h3>Wireless Earbuds</h3>
+    <p>₹5000</p>
+    <div class="quantity-controls">
+        <button onclick="decreaseQuantity(this)">-</button>
+        <span class="quantity">1</span>
+        <button onclick="increaseQuantity(this)">+</button>
+    </div>
+    <button onclick="addToCart()">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="C:/Users/sumeet/Downloads/bb.jpg" alt="Product Image">
+    <h3>Wireless Earbuds</h3>
+    <p>₹5000</p>
+    <div class="quantity-controls">
+        <button onclick="decreaseQuantity(this)">-</button>
+        <span class="quantity">1</span>
+        <button onclick="increaseQuantity(this)">+</button>
+    </div>
+    <button onclick="addToCart()">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="C:/Users/sumeet/Downloads/bb.jpg" alt="Product Image">
+    <h3>Wireless Earbuds</h3>
+    <p>₹5000</p>
+    <div class="quantity-controls">
+        <button onclick="decreaseQuantity(this)">-</button>
+        <span class="quantity">1</span>
+        <button onclick="increaseQuantity(this)">+</button>
+    </div>
+    <button onclick="addToCart()">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="C:/Users/sumeet/Downloads/bb.jpg" alt="Product Image">
+    <h3>Wireless Earbuds</h3>
+    <p>₹5000</p>
+    <div class="quantity-controls">
+        <button onclick="decreaseQuantity(this)">-</button>
+        <span class="quantity">1</span>
+        <button onclick="increaseQuantity(this)">+</button>
+    </div>
+    <button onclick="addToCart()">Add to Cart</button>
+</div>
+
+
+<!-- Ensure the quantity and Add to Cart functionality works as intended across all products -->
+
+</div>
+
+<script>
+function increaseQuantity(button) {
+    const quantityElement = button.previousElementSibling;
+    let quantity = parseInt(quantityElement.textContent);
+    quantityElement.textContent = quantity + 1;
+}
+
+function decreaseQuantity(button) {
+    const quantityElement = button.nextElementSibling;
+    let quantity = parseInt(quantityElement.textContent);
+    if (quantity > 1) {
+        quantityElement.textContent = quantity - 1;
+    }
+}
+
+function addToCart() {
+    alert("Product added to the cart!");
+}
+</script>
+
+<!-- Cart Summary Floating Bubble -->
+<div class="cart-summary" id="cartSummary">
+    <h2>Your Cart</h2>
+    <div id="cartItems">No items added yet.</div>
+    <p>Total: $<span id="totalPrice">0.00</span></p>
+    <button id="confirmOrderButton" onclick="confirmOrder()">Confirm Order</button>
+    <div id="invoiceSection" style="display:none;">
+        <h3>Invoice</h3>
+        <div id="invoiceDetails"></div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>&copy; 2024 Sumeetify. All rights reserved.</p>
+</div>
+
+
+   <!-- Link to search.js -->
+   <script src="search.js" defer></script>
+
+   <!-- Link to app.js -->
+   <script src="app.js" defer></script>
+
+</body>
+</html>
+

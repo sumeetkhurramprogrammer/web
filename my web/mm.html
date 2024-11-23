@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NARAZ - E-Commerce Store</title>
+    <link rel="stylesheet" href="./s.css">
+</head>
+
+<body>
+
+<header>
+    <div class="header-top">
+        <div class="logo">NARAZ</div>
+        <button id="cartButton" onclick="toggleCart()">🛒</button>
+    </div>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search products..." oninput="searchProducts()">
+        <button id="searchButton">Search</button>
+    </div>
+</header>
+
+<div class="slider-container">
+    <div class="slider">
+        <div class="slide"><img src="C:/Users/sumeet/Downloads/ex.jpg" alt="Slide 1"></div>
+        <div class="slide"><img src="C:/Users/sumeet/Downloads/ex.jpg" alt="Slide 2"></div>
+        <div class="slide"><img src="C:/Users/sumeet/Downloads/ex.jpg" alt="Slide 3"></div>
+    </div>
+    <button class="arrow left" onclick="prevSlide()">&#8249;</button>
+    <button class="arrow right" onclick="nextSlide()">&#8250;</button>
+    <div class="indicators"></div>
+</div>
+
+<div style="background-color: #333; text-align: center; padding: 20px;">
+    <h1 style="color: white; margin: 0;">CATEGORY</h1>
+</div>
+
+<div class="full-screen-cards">
+    <a href="./tech.html" class="full-screen-card">
+        <img src="C:/Users/sumeet/Downloads/tt.jpeg" alt="Tech">
+        <h3>Tech</h3>
+    </a>
+    <a href="./clothing.html" class="full-screen-card">
+        <img src="C:/Users/sumeet/Downloads/cc.jpeg" alt="Clothing">
+        <h3>Clothing</h3>
+    </a>
+</div>
+
+<div style="background-color: #333; text-align: center; padding: 20px;">
+    <h1 style="color: white; margin: 0;">JUST FOR YOU</h1>
+</div>
+
+<div class="product-cards-container">
+    <div class="product-card" data-category="Tech">
+        <img src="C:/Users/sumeet/Downloads/bb.jpg" alt="Product Image">
+        <h3>Wireless Earbuds</h3>
+        <p>₹5000</p>
+        <div class="quantity-controls">
+            <button onclick="decreaseQuantity(this)">-</button>
+            <span class="quantity">1</span>
+            <button onclick="increaseQuantity(this)">+</button>
+        </div>
+        <button onclick="addToCart()">Add to Cart</button>
+    </div>
+    <div class="product-card" data-category="Clothing">
+        <img src="C:/Users/sumeet/Downloads/ex.jpg" alt="Product Image">
+        <h3>Shirt</h3>
+        <p>₹1500</p>
+        <div class="quantity-controls">
+            <button onclick="decreaseQuantity(this)">-</button>
+            <span class="quantity">1</span>
+            <button onclick="increaseQuantity(this)">+</button>
+        </div>
+        <button onclick="addToCart()">Add to Cart</button>
+    </div>
+</div>
+
+<!-- Cart Summary Floating Bubble -->
+<div class="cart-summary" id="cartSummary">
+    <h2>Cart Summary</h2>
+    <div id="cartItems">No items added yet.</div>
+    <div>Total: ₹<span id="totalPrice">0.00</span></div>
+    <button onclick="confirmOrder()">Confirm Order</button>
+</div>
+
+<script src="./a.js" defer></script>
+<script src="./global.js" defer></script>
+
+</body>
+
+</html>
